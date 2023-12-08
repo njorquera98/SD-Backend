@@ -4,6 +4,9 @@ export class CreateUserDto {
   @IsString()
   username: string;
 
+  @IsOptional()
+  password: string;
+   
   @IsString()
   name: string;
   
