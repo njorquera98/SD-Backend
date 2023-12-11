@@ -1,8 +1,9 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import * as bcryptjs from 'bcryptjs'
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
+import { ResetDto } from './dto/reset.dto';
 
 @Injectable()
 export class AuthService {
@@ -47,4 +48,15 @@ export class AuthService {
     const token = await this.jwtService.signAsync(payload)
     return {token, username};
   }
+
+  async reset({ email }: ResetDto){
+    const correo = await this.usersService.findOneByEmail(email);
+
+    if(!correo){
+      throw new NotFoundException("Correo no encontrado") 
+    }
+
+
+  }
+  
 }
