@@ -14,13 +14,13 @@ export class UsersService {
 
   ) { }
 
-  async  create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto) {
     return await this.userRepository.save(createUserDto);
   }
 
   async findAll() {
     return await this.userRepository.find();
-  }
+  } 
 
   async findOne(id: number) {
     return await this.userRepository.findOneBy({ id });
@@ -33,4 +33,10 @@ export class UsersService {
   async remove(id: number) {
     return await this.userRepository.softDelete({ id });
   }
+
+  async findOneByUsername(username: string) {
+    return await this.userRepository.findOneBy({ username })
+  }
+
+  
 }

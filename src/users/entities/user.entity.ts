@@ -7,13 +7,13 @@ export class User {
   @Column({primary: true, generated: true })
   id: number;
   
-  @Column({unique: true})
+  @Column({unique: true, nullable: false})
   username: string;
 
-  @Column()
+  @Column({nullable: false})
   password: string;
 
-  @Column({unique: true})
+  @Column({unique: true, nullable: false})
   email: string;
 
   @Column()
