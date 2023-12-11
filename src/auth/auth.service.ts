@@ -16,8 +16,14 @@ export class AuthService {
 
     const user = await this.usersService.findOneByUsername(username);
     if(user){
-      throw new BadRequestException('Usuario ya registrado');
+      throw new BadRequestException("Usuario ya registrado");
     }
+
+    const correo = await this.usersService.findOneByEmail(email)
+    if(correo){
+      throw new BadRequestException("Email ya registrado")
+    }
+
     return await this.usersService.create({
       username,
       name,
